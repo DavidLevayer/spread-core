@@ -1,0 +1,13 @@
+{
+    "name": "spread-core",
+    "version": "0.0.1",
+    "description": "Spread core application",
+    "author": "David Levayer <david.levayer@gmail.com>",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "dependencies": {
+        "express": "^4.16.1"
+    }
+}
