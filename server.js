@@ -3,6 +3,7 @@
 const RabbitmqProducerInfo = require('./libs/model/rabbitmq/rabbitmq-producer-info');
 const RabbitmqProducer = require('./libs/util/rabbitmq-producer');
 const EventGenerator = require('./libs/core/event-generator');
+const Game = require('./libs/core/game');
 const ResourceEvent = require('./libs/core/event/resource.event');
 
 // const express = require('express');
@@ -25,7 +26,8 @@ const rabbitmqProducer = new RabbitmqProducer(rabbitmqProducerInfo);
 
 const resourceEvent = new ResourceEvent(rabbitmqProducer);
 
-const eventGenerator = new EventGenerator(1000);
+const game = new Game();
+const eventGenerator = new EventGenerator(game, 1000);
 eventGenerator.register(resourceEvent);
 
 eventGenerator.start();

@@ -1,16 +1,19 @@
 'use strict';
 
 const AbstractEvent = require('./event/abstract-event');
+const Game = require('../core/game');
 
 class EventGenerator {
 
     /**
      * 
+     * @param {Game} game
      * @param {number} loopDelay time between two game loop, in milliseconds
      */
-    constructor(loopDelay) {
+    constructor(game, loopDelay) {
         this.events = [];
         this.loop = null;
+        this.game = game;
         this.loopDelay = loopDelay;
     }
 
@@ -35,7 +38,7 @@ class EventGenerator {
             this.events.forEach((event) => {
                 const randomNumber = Math.random();
                 if (randomNumber < event.probability) {
-                    event.trigger();
+                    event.trigger(this.game);
                 }
             })
         }, this.loopDelay);

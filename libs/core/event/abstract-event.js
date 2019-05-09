@@ -1,6 +1,7 @@
 'use strict';
 
 const RabbitmqProducer = require('../../util/rabbitmq-producer');
+const Game = require('../game');
 
 class AbstractEvent {
 
@@ -32,7 +33,11 @@ class AbstractEvent {
         this.probability = probability;
     }
 
-    trigger() {
+    /**
+     * 
+     * @param {Game} game 
+     */
+    trigger(game) {
         throw new Error('trigger method must be overriden');
     }
 }
