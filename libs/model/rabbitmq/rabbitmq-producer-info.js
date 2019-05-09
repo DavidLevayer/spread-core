@@ -1,6 +1,6 @@
 'use strict';
 
-class RabbitmqConnectionInfo {
+class RabbitmqProducerInfo {
 
     /**
      * 
@@ -15,4 +15,4 @@ class RabbitmqConnectionInfo {
     }
 }
 
-module.exports = RabbitmqConnectionInfo;
+module.exports = RabbitmqProducerInfo;

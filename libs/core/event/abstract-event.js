@@ -1,18 +1,18 @@
 'use strict';
 
-const RabbitmqConnector = require('../../util/rabbitmq-connector');
+const RabbitmqProducer = require('../../util/rabbitmq-producer');
 
 class AbstractEvent {
 
     /**
      * 
      * @param {string} eventId 
-     * @param {RabbitmqConnector} rabbitmqConnector 
+     * @param {RabbitmqProducer} rabbitmqProducer 
      * @param {number} probability 
      */
-    constructor(eventId, rabbitmqConnector, probability) {
+    constructor(eventId, rabbitmqProducer, probability) {
         this.eventId = eventId;
-        this.rabbitmqConnector = rabbitmqConnector;
+        this.rabbitmqProducer = rabbitmqProducer;
         this.probability = probability
     }
 
@@ -20,8 +20,8 @@ class AbstractEvent {
         return this.eventId;
     }
 
-    getRabbitmqConnector() {
-        return this.rabbitmqConnector;
+    getRabbitmqProducer() {
+        return this.rabbitmqProducer;
     }
 
     getProbability() {

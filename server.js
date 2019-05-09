@@ -1,7 +1,7 @@
 'use strict';
 
-const RabbitmqConnectorInfo = require('./libs/model/rabbitmq/rabbitmq-connection-info');
-const RabbitmqConnector = require('./libs/util/rabbitmq-connector');
+const RabbitmqProducerInfo = require('./libs/model/rabbitmq/rabbitmq-producer-info');
+const RabbitmqProducer = require('./libs/util/rabbitmq-producer');
 const EventGenerator = require('./libs/core/event-generator');
 const ResourceEvent = require('./libs/core/event/resource.event');
 
@@ -20,10 +20,10 @@ const ResourceEvent = require('./libs/core/event/resource.event');
 // app.listen(PORT, HOST);
 // console.log(`Running on http://${HOST}:${PORT}`);
 
-const rabbitmqConnectorInfo = new RabbitmqConnectorInfo('localhost', 5672, 'spread');
-const rabbitmqConnector = new RabbitmqConnector(rabbitmqConnectorInfo);
+const rabbitmqProducerInfo = new RabbitmqProducerInfo('localhost', 5672, 'spread');
+const rabbitmqProducer = new RabbitmqProducer(rabbitmqProducerInfo);
 
-const resourceEvent = new ResourceEvent(rabbitmqConnector);
+const resourceEvent = new ResourceEvent(rabbitmqProducer);
 
 const eventGenerator = new EventGenerator(1000);
 eventGenerator.register(resourceEvent);

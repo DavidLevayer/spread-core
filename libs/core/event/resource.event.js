@@ -4,8 +4,8 @@ const AbstractEvent = require('./abstract-event');
 
 class ResourceEvent extends AbstractEvent {
 
-    constructor(rabbitmqConnector) {
-        super('resource', rabbitmqConnector, 1);
+    constructor(rabbitmqProducer) {
+        super('resource', rabbitmqProducer, 1);
         this.resources = [
             'sand',
             'water',
@@ -20,7 +20,7 @@ class ResourceEvent extends AbstractEvent {
         this.resources.forEach((resource) => {
             resources[resource] = 10;
         });
-        this.getRabbitmqConnector().send('resource.tick', message);
+        this.getRabbitmqProducer().send('resource.tick', message);
     }
 }
 
