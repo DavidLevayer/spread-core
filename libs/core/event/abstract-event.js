@@ -1,6 +1,6 @@
 'use strict';
 
-const RabbitmqProducer = require('../../util/rabbitmq-producer');
+const RabbitmqProducer = require('spread-common/libs/util/rabbitmq/rabbitmq-producer');
 const Game = require('../game');
 
 class AbstractEvent {

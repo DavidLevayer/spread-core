@@ -1,7 +1,7 @@
 'use strict';
 
-const RabbitmqProducerInfo = require('./libs/model/rabbitmq/rabbitmq-producer-info');
-const RabbitmqProducer = require('./libs/util/rabbitmq-producer');
+const RabbitmqProducerInfo = require('spread-common/libs/model/rabbitmq/rabbitmq-producer-info');
+const RabbitmqProducer = require('spread-common/libs/util/rabbitmq/rabbitmq-producer');
 const EventGenerator = require('./libs/core/event-generator');
 const Game = require('./libs/core/game');
 const ResourceEvent = require('./libs/core/event/resource.event');
