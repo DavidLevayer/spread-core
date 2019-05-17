@@ -1,9 +1,7 @@
 'use strict';
 
-const RabbitmqProducerInfo = require('spread-common/libs/model/rabbitmq/rabbitmq-producer-info');
-const RabbitmqProducer = require('spread-common/libs/util/rabbitmq/rabbitmq-producer');
-const RabbitmqConsumerInfo = require('spread-common/libs/model/rabbitmq/rabbitmq-consumer-info');
-const RabbitmqConsumer = require('spread-common/libs/util/rabbitmq/rabbitmq-consumer');
+const RabbitmqInfo = require('spread-common/libs/model/rabbitmq/rabbitmq-info');
+const RabbitmqManager = require('spread-common/libs/util/rabbitmq/rabbitmq-manager');
 const EventGenerator = require('./libs/core/event-generator');
 const Game = require('./libs/core/game');
 const ResourceEvent = require('./libs/core/event/resource.event');
@@ -24,25 +22,20 @@ const BuildingConsumer = require('./libs/core/consumer/building.consumer');
 // app.listen(PORT, HOST);
 // console.log(`Running on http://${HOST}:${PORT}`);
 
-const rabbitmqProducerInfo = new RabbitmqProducerInfo('localhost', 5672, 'spread');
-const rabbitmqProducer = new RabbitmqProducer(rabbitmqProducerInfo);
-
-const resourceEvent = new ResourceEvent(rabbitmqProducer);
+const rabbitmqInfo = new RabbitmqInfo('localhost', 5672, 'spread');
+const rabbitmqManager = new RabbitmqManager(rabbitmqInfo);
 
 const game = new Game();
 const eventGenerator = new EventGenerator(game, 1000);
-eventGenerator.register(resourceEvent);
 
+// Register events
+eventGenerator.register(new ResourceEvent(rabbitmqManager.createProducer()));
+
+// Register consumers
+rabbitmqManager.addConsumer(new BuildingConsumer());
+
+// Start events cycle
 eventGenerator.start();
 setTimeout(() => {
     eventGenerator.stop();
 }, 10000);
-
-const rabbitmqConsumerInfo = new RabbitmqConsumerInfo('localhost', 5672, 'spread');
-const rabbitmqConsumer = new RabbitmqConsumer(rabbitmqConsumerInfo);
-
-const buildingConsumer = new BuildingConsumer();
-
-setTimeout(() => {
-    rabbitmqConsumer.setConsumer(buildingConsumer);
-}, 2000);
