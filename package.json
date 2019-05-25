@@ -8,6 +8,6 @@
         "start": "node server.js"
     },
     "dependencies": {
-        "spread-common": "0.0.1"
+        "spread-common": "latest"
     }
 }
